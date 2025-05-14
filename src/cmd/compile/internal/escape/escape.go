@@ -120,11 +120,26 @@ type escape struct {
 
 func Funcs(all []*ir.Func) {
 	ir.VisitFuncsBottomUp(all, Batch)
+	// 然后输出所有的统计信息
+	output_one_package_countAll()
+}
+
+func output_one_package_countAll() {
+	fmt.Printf("*****#9# %d %d %d %d %d %d %d %d %d #",
+		ac.c_retrun, ac.c_too_large, ac.c_dynamic_alloc, ac.c_global_ref,
+		ac.c_outerloop_ref, ac.c_indirect_ref, ac.c_coroutine, ac.c_callparam,
+		ac.c_unknown)
 }
 
 // Batch performs escape analysis on a minimal batch of
 // functions.
 func Batch(fns []*ir.Func, recursive bool) {
+
+	// 开始判断新的函数
+	// 重置变量
+	whys = []one_why{}
+	one_escape_func = []one_escape{}
+
 	var b batch
 	b.heapLoc.attrs = attrEscapes | attrPersists | attrMutates | attrCalls
 	b.mutatorLoc.attrs = attrMutates

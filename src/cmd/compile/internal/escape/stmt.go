@@ -175,7 +175,9 @@ func (e *escape) stmt(n ir.Node) {
 		ks := e.addrs(n.Lhs)
 		e.call(ks, n.Rhs[0])
 		e.reassigned(ks, n)
-	case ir.ORETURN:
+	case ir.ORETURN: //reason
+		//return i
+		//retun &i
 		n := n.(*ir.ReturnStmt)
 		results := e.curfn.Type().Results()
 		dsts := make([]ir.Node, len(results))
@@ -187,6 +189,7 @@ func (e *escape) stmt(n ir.Node) {
 		e.call(nil, n)
 	case ir.OGO, ir.ODEFER:
 		n := n.(*ir.GoDeferStmt)
+		this_stmt_is_go_defer = true // 当前分析的句子是一个go或者defer的句子
 		e.goDeferStmt(n)
 
 	case ir.OTAILCALL:

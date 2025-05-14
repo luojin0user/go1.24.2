@@ -1,5 +1,8 @@
 # The Go Programming Language
 
+[escape根目录路径](./src/cmd/compile/internal/escape)
+
+
 Go is an open source programming language that makes it easy to build simple,
 reliable, and efficient software.
 

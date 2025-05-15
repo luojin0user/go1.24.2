@@ -1,0 +1,536 @@
+# command-line-arguments
+./escape_param.go:19:13: parameter p leaks to ~r0 with derefs=0:
+./escape_param.go:19:13:   flow: ~r0 = p:
+./escape_param.go:19:13:     from return p (return) at ./escape_param.go:20:2
+./escape_param.go:19:13: leaking param: p to result ~r0 level=0
+./escape_param.go:29:2: i escapes to heap:
+./escape_param.go:29:2:   flow: {heap} = &i:
+./escape_param.go:29:2:     from &i (address-of) at ./escape_param.go:30:16
+./escape_param.go:29:2:     from param0(&i) (call parameter) at ./escape_param.go:30:15
+./escape_param.go:29:2:     from param0(&i) (interface-converted) at ./escape_param.go:30:15
+./escape_param.go:29:2:     from sink = param0(&i) (assign) at ./escape_param.go:30:7
+my global ref escape count 1
+./escape_param.go:29:2: moved to heap: i
+./escape_param.go:34:17: parameter p2 leaks to ~r1 with derefs=0:
+./escape_param.go:34:17:   flow: ~r1 = p2:
+./escape_param.go:34:17:     from return p1, p2 (return) at ./escape_param.go:35:2
+./escape_param.go:34:13: parameter p1 leaks to ~r0 with derefs=0:
+./escape_param.go:34:13:   flow: ~r0 = p1:
+./escape_param.go:34:13:     from return p1, p2 (return) at ./escape_param.go:35:2
+./escape_param.go:34:13: leaking param: p1 to result ~r0 level=0
+./escape_param.go:34:17: leaking param: p2 to result ~r1 level=0
+./escape_param.go:39:2: i escapes to heap:
+./escape_param.go:39:2:   flow: .autotmp_2 = &i:
+./escape_param.go:39:2:     from &i (address-of) at ./escape_param.go:41:19
+./escape_param.go:39:2:     from param1(&i, &j) (call parameter) at ./escape_param.go:41:18
+./escape_param.go:39:2:   flow: {heap} = .autotmp_2:
+./escape_param.go:39:2:     from .autotmp_2 (interface-converted) at ./escape_param.go:41:10
+./escape_param.go:39:2:     from sink, _ = .autotmp_2, .autotmp_3 (assign-pair) at ./escape_param.go:41:10
+my global ref escape count 2
+./escape_param.go:39:2: moved to heap: i
+./escape_param.go:45:13: parameter p1 leaks to {heap} with derefs=0:
+./escape_param.go:45:13:   flow: {heap} = p1:
+./escape_param.go:45:13:     from *p2 = p1 (assign) at ./escape_param.go:46:6
+./escape_param.go:45:13: leaking param: p1
+./escape_param.go:45:22: p2 does not escape
+./escape_param.go:50:2: i escapes to heap:
+./escape_param.go:50:2:   flow: {heap} = &i:
+./escape_param.go:50:2:     from &i (address-of) at ./escape_param.go:52:9
+./escape_param.go:50:2:     from param2(&i, &p) (call parameter) at ./escape_param.go:52:8
+my callparam ref escape count 1
+./escape_param.go:50:2: moved to heap: i
+./escape_param.go:57:2: i escapes to heap:
+./escape_param.go:57:2:   flow: {heap} = &i:
+./escape_param.go:57:2:     from &i (address-of) at ./escape_param.go:59:9
+./escape_param.go:57:2:     from param2(&i, &p) (call parameter) at ./escape_param.go:59:8
+my callparam ref escape count 2
+./escape_param.go:57:2: moved to heap: i
+./escape_param.go:64:13: paramArraySelfAssign ignoring self-assignment in p.pairs[0] = p.pairs[1]
+./escape_param.go:63:27: p does not escape
+./escape_param.go:67:38: parameter p leaks to {heap} with derefs=1:
+./escape_param.go:67:38:   flow: {heap} = *p:
+./escape_param.go:67:38:     from p.pairs (dot of pointer) at ./escape_param.go:69:21
+./escape_param.go:67:38:     from p.pairs[1] (fixed-array-index-of) at ./escape_param.go:69:27
+./escape_param.go:67:38:     from p.pairs[zero()] = p.pairs[1] (assign) at ./escape_param.go:69:18
+./escape_param.go:67:38: leaking param content: p
+./escape_param.go:85:16: parameter x leaks to {heap} with derefs=0:
+./escape_param.go:85:16:   flow: {heap} = x:
+./escape_param.go:85:16:     from sink = x (assign) at ./escape_param.go:86:7
+./escape_param.go:85:16: leaking param: x
+./escape_param.go:90:14: sinkAfterSelfAssignment1 ignoring self-assignment in box.pair.p1 = box.pair.p2
+./escape_param.go:89:31: parameter box leaks to {heap} with derefs=2:
+./escape_param.go:89:31:   flow: {heap} = **box:
+./escape_param.go:89:31:     from box.pair (dot of pointer) at ./escape_param.go:91:12
+./escape_param.go:89:31:     from box.pair.p2 (dot of pointer) at ./escape_param.go:91:17
+./escape_param.go:89:31:     from box.pair.p2 (interface-converted) at ./escape_param.go:91:17
+./escape_param.go:89:31:     from sink = box.pair.p2 (assign) at ./escape_param.go:91:7
+./escape_param.go:89:31: leaking param content: box
+./escape_param.go:95:14: sinkAfterSelfAssignment2 ignoring self-assignment in box.pair.p1 = box.pair.p2
+./escape_param.go:94:31: parameter box leaks to {heap} with derefs=1:
+./escape_param.go:94:31:   flow: {heap} = *box:
+./escape_param.go:94:31:     from box.pair (dot of pointer) at ./escape_param.go:96:12
+./escape_param.go:94:31:     from box.pair (interface-converted) at ./escape_param.go:96:12
+./escape_param.go:94:31:     from sink = box.pair (assign) at ./escape_param.go:96:7
+./escape_param.go:94:31: leaking param content: box
+./escape_param.go:100:14: sinkAfterSelfAssignment3 ignoring self-assignment in box.pair.p1 = box.pair.p2
+./escape_param.go:99:31: parameter box leaks to {heap} with derefs=2:
+./escape_param.go:99:31:   flow: {heap} = **box:
+./escape_param.go:99:31:     from box.pair (dot of pointer) at ./escape_param.go:101:15
+./escape_param.go:99:31:     from box.pair.p2 (dot of pointer) at ./escape_param.go:101:20
+./escape_param.go:99:31:     from box.pair.p2 (interface-converted) at ./escape_param.go:101:20
+./escape_param.go:99:31:     from leakParam(box.pair.p2) (call parameter) at ./escape_param.go:101:11
+./escape_param.go:99:31: leaking param content: box
+./escape_param.go:105:14: sinkAfterSelfAssignment4 ignoring self-assignment in box.pair.p1 = box.pair.p2
+./escape_param.go:104:31: parameter box leaks to {heap} with derefs=1:
+./escape_param.go:104:31:   flow: {heap} = *box:
+./escape_param.go:104:31:     from box.pair (dot of pointer) at ./escape_param.go:106:15
+./escape_param.go:104:31:     from box.pair (interface-converted) at ./escape_param.go:106:15
+./escape_param.go:104:31:     from leakParam(box.pair) (call parameter) at ./escape_param.go:106:11
+./escape_param.go:104:31: leaking param content: box
+./escape_param.go:110:15: selfAssignmentAndUnrelated ignoring self-assignment in box1.pair.p1 = box1.pair.p2
+./escape_param.go:109:39: parameter box2 leaks to {heap} with derefs=2:
+./escape_param.go:109:39:   flow: {heap} = **box2:
+./escape_param.go:109:39:     from box2.pair (dot of pointer) at ./escape_param.go:111:16
+./escape_param.go:109:39:     from box2.pair.p2 (dot of pointer) at ./escape_param.go:111:21
+./escape_param.go:109:39:     from box2.pair.p2 (interface-converted) at ./escape_param.go:111:21
+./escape_param.go:109:39:     from leakParam(box2.pair.p2) (call parameter) at ./escape_param.go:111:11
+./escape_param.go:109:33: box1 does not escape
+./escape_param.go:109:39: leaking param content: box2
+./escape_param.go:114:31: parameter box2 leaks to {heap} with derefs=2:
+./escape_param.go:114:31:   flow: {heap} = **box2:
+./escape_param.go:114:31:     from box2.pair (dot of pointer) at ./escape_param.go:115:21
+./escape_param.go:114:31:     from box2.pair.p1 (dot of pointer) at ./escape_param.go:115:26
+./escape_param.go:114:31:     from box1.pair.p1 = box2.pair.p1 (assign) at ./escape_param.go:115:15
+./escape_param.go:114:25: box1 does not escape
+./escape_param.go:114:31: leaking param content: box2
+./escape_param.go:118:29: parameter p2 leaks to {heap} with derefs=1:
+./escape_param.go:118:29:   flow: {heap} = *p2:
+./escape_param.go:118:29:     from p2.pairs (dot of pointer) at ./escape_param.go:119:18
+./escape_param.go:118:29:     from p2.pairs[1] (fixed-array-index-of) at ./escape_param.go:119:24
+./escape_param.go:118:29:     from p1.pairs[0] = p2.pairs[1] (assign) at ./escape_param.go:119:14
+./escape_param.go:118:25: p1 does not escape
+./escape_param.go:118:29: leaking param content: p2
+./escape_param.go:122:29: parameter p2 leaks to {heap} with derefs=2:
+./escape_param.go:122:29:   flow: {heap} = **p2:
+./escape_param.go:122:29:     from p2.pairs (dot of pointer) at ./escape_param.go:123:21
+./escape_param.go:122:29:     from p2.pairs[1] (fixed-array-index-of) at ./escape_param.go:123:27
+./escape_param.go:122:29:     from p2.pairs[1].p1 (dot of pointer) at ./escape_param.go:123:30
+./escape_param.go:122:29:     from p1.pairs[0].p1 = p2.pairs[1].p1 (assign) at ./escape_param.go:123:17
+./escape_param.go:122:25: p1 does not escape
+./escape_param.go:122:29: leaking param content: p2
+./escape_param.go:127:14: boxedPairSelfAssign ignoring self-assignment in box.pair.p1 = box.pair.p2
+./escape_param.go:126:26: box does not escape
+./escape_param.go:131:12: wrappedPairSelfAssign ignoring self-assignment in w.pair.p1 = w.pair.p2
+./escape_param.go:130:28: w does not escape
+./escape_param.go:141:7: param3 ignoring self-assignment in p.p1 = p.p2
+./escape_param.go:140:13: p does not escape
+./escape_param.go:157:9: p escapes to heap:
+./escape_param.go:157:9:   flow: {heap} = &{storage for p}:
+./escape_param.go:157:9:     from p (spill) at ./escape_param.go:157:9
+./escape_param.go:157:9:     from sink = p (assign) at ./escape_param.go:157:7
+my global ref escape count 3
+./escape_param.go:154:2: j escapes to heap:
+./escape_param.go:154:2:   flow: p = &j:
+./escape_param.go:154:2:     from &j (address-of) at ./escape_param.go:155:16
+./escape_param.go:154:2:     from Pair{...} (struct literal element) at ./escape_param.go:155:11
+./escape_param.go:154:2:     from p := Pair{...} (assign) at ./escape_param.go:155:4
+./escape_param.go:154:2:   flow: {storage for p} = p:
+./escape_param.go:154:2:     from p (interface-converted) at ./escape_param.go:157:9
+my global ref escape count 4
+./escape_param.go:153:2: i escapes to heap:
+./escape_param.go:153:2:   flow: p = &i:
+./escape_param.go:153:2:     from &i (address-of) at ./escape_param.go:155:12
+./escape_param.go:153:2:     from Pair{...} (struct literal element) at ./escape_param.go:155:11
+./escape_param.go:153:2:     from p := Pair{...} (assign) at ./escape_param.go:155:4
+./escape_param.go:153:2:   flow: {storage for p} = p:
+./escape_param.go:153:2:     from p (interface-converted) at ./escape_param.go:157:9
+my global ref escape count 5
+./escape_param.go:153:2: moved to heap: i
+./escape_param.go:154:2: moved to heap: j
+./escape_param.go:157:9: p escapes to heap
+./escape_param.go:161:23: parameter i leaks to {heap} with derefs=0:
+./escape_param.go:161:23:   flow: {heap} = i:
+./escape_param.go:161:23:     from p.p1 = i (assign) at ./escape_param.go:162:7
+./escape_param.go:161:7: p does not escape
+./escape_param.go:161:23: leaking param: i
+./escape_param.go:166:2: i escapes to heap:
+./escape_param.go:166:2:   flow: {heap} = &i:
+./escape_param.go:166:2:     from &i (address-of) at ./escape_param.go:168:11
+./escape_param.go:166:2:     from (*Pair).param4(p, &i) (call parameter) at ./escape_param.go:168:10
+my callparam ref escape count 3
+./escape_param.go:166:2: moved to heap: i
+./escape_param.go:173:2: i escapes to heap:
+./escape_param.go:173:2:   flow: {heap} = &i:
+./escape_param.go:173:2:     from &i (address-of) at ./escape_param.go:175:11
+./escape_param.go:173:2:     from (*Pair).param4(p, &i) (call parameter) at ./escape_param.go:175:10
+my callparam ref escape count 4
+./escape_param.go:176:9: p escapes to heap:
+./escape_param.go:176:9:   flow: {heap} = &{storage for p}:
+./escape_param.go:176:9:     from p (spill) at ./escape_param.go:176:9
+./escape_param.go:176:9:     from sink = p (assign) at ./escape_param.go:176:7
+my global ref escape count 6
+./escape_param.go:173:2: moved to heap: i
+./escape_param.go:176:9: p escapes to heap
+./escape_param.go:180:13: parameter i leaks to {heap} with derefs=0:
+./escape_param.go:180:13:   flow: {heap} = i:
+./escape_param.go:180:13:     from i (interface-converted) at ./escape_param.go:181:9
+./escape_param.go:180:13:     from sink = i (assign) at ./escape_param.go:181:7
+./escape_param.go:180:13: leaking param: i
+./escape_param.go:185:2: i escapes to heap:
+./escape_param.go:185:2:   flow: {heap} = &i:
+./escape_param.go:185:2:     from &i (address-of) at ./escape_param.go:186:9
+./escape_param.go:185:2:     from param5(&i) (call parameter) at ./escape_param.go:186:8
+my callparam ref escape count 5
+./escape_param.go:185:2: moved to heap: i
+./escape_param.go:190:13: parameter i leaks to {heap} with derefs=1:
+./escape_param.go:190:13:   flow: {heap} = *i:
+./escape_param.go:190:13:     from *i (indirection) at ./escape_param.go:191:9
+./escape_param.go:190:13:     from *i (interface-converted) at ./escape_param.go:191:9
+./escape_param.go:190:13:     from sink = *i (assign) at ./escape_param.go:191:7
+./escape_param.go:190:13: leaking param content: i
+./escape_param.go:196:2: p escapes to heap:
+./escape_param.go:196:2:   flow: p2 = &p:
+./escape_param.go:196:2:     from &p (address-of) at ./escape_param.go:197:8
+./escape_param.go:196:2:     from p2 := &p (assign) at ./escape_param.go:197:5
+./escape_param.go:196:2:   flow: {heap} = p2:
+./escape_param.go:196:2:     from &p2 (address-of) at ./escape_param.go:198:9
+./escape_param.go:196:2:     from param6(&p2) (call parameter) at ./escape_param.go:198:8
+my callparam ref escape count 6
+./escape_param.go:195:2: i escapes to heap:
+./escape_param.go:195:2:   flow: p = &i:
+./escape_param.go:195:2:     from &i (address-of) at ./escape_param.go:196:7
+./escape_param.go:195:2:     from p := &i (assign) at ./escape_param.go:196:4
+my callparam ref escape count 7
+./escape_param.go:195:2: moved to heap: i
+./escape_param.go:196:2: moved to heap: p
+./escape_param.go:202:13: parameter i leaks to {heap} with derefs=2:
+./escape_param.go:202:13:   flow: {heap} = **i:
+./escape_param.go:202:13:     from *i (indirection) at ./escape_param.go:203:10
+./escape_param.go:202:13:     from *(*i) (indirection) at ./escape_param.go:203:9
+./escape_param.go:202:13:     from *(*i) (interface-converted) at ./escape_param.go:203:9
+./escape_param.go:202:13:     from sink = *(*i) (assign) at ./escape_param.go:203:7
+./escape_param.go:202:13: leaking param content: i
+./escape_param.go:207:2: i escapes to heap:
+./escape_param.go:207:2:   flow: p = &i:
+./escape_param.go:207:2:     from &i (address-of) at ./escape_param.go:208:7
+./escape_param.go:207:2:     from p := &i (assign) at ./escape_param.go:208:4
+./escape_param.go:207:2:   flow: p2 = &p:
+./escape_param.go:207:2:     from &p (address-of) at ./escape_param.go:209:8
+./escape_param.go:207:2:     from p2 := &p (assign) at ./escape_param.go:209:5
+./escape_param.go:207:2:   flow: {heap} = *p2:
+./escape_param.go:207:2:     from &p2 (address-of) at ./escape_param.go:210:9
+./escape_param.go:207:2:     from param7(&p2) (call parameter) at ./escape_param.go:210:8
+my callparam ref escape count 8
+./escape_param.go:207:2: moved to heap: i
+./escape_param.go:215:9: *(*i) escapes to heap:
+./escape_param.go:215:9:   flow: {heap} = &{storage for *(*i)}:
+./escape_param.go:215:9:     from *(*i) (spill) at ./escape_param.go:215:9
+./escape_param.go:215:9:     from sink = *(*i) (assign) at ./escape_param.go:215:7
+my global ref escape count 7
+./escape_param.go:214:13: i does not escape
+./escape_param.go:215:9: *(*i) escapes to heap
+./escape_param.go:225:13: parameter p leaks to ~r0 with derefs=1:
+./escape_param.go:225:13:   flow: ~r0 = *p:
+./escape_param.go:225:13:     from *p (indirection) at ./escape_param.go:226:9
+./escape_param.go:225:13:     from return *p (return) at ./escape_param.go:226:2
+./escape_param.go:225:13: leaking param: p to result ~r0 level=1
+./escape_param.go:238:2: p escapes to heap:
+./escape_param.go:238:2:   flow: p2 = &p:
+./escape_param.go:238:2:     from &p (address-of) at ./escape_param.go:239:8
+./escape_param.go:238:2:     from p2 := &p (assign) at ./escape_param.go:239:5
+./escape_param.go:238:2:   flow: {heap} = p2:
+./escape_param.go:238:2:     from &p2 (address-of) at ./escape_param.go:240:16
+./escape_param.go:238:2:     from param9(&p2) (call parameter) at ./escape_param.go:240:15
+./escape_param.go:238:2:     from param9(&p2) (interface-converted) at ./escape_param.go:240:15
+./escape_param.go:238:2:     from sink = param9(&p2) (assign) at ./escape_param.go:240:7
+my global ref escape count 8
+./escape_param.go:237:2: i escapes to heap:
+./escape_param.go:237:2:   flow: p = &i:
+./escape_param.go:237:2:     from &i (address-of) at ./escape_param.go:238:7
+./escape_param.go:237:2:     from p := &i (assign) at ./escape_param.go:238:4
+my global ref escape count 9
+./escape_param.go:237:2: moved to heap: i
+./escape_param.go:238:2: moved to heap: p
+./escape_param.go:244:14: parameter p leaks to ~r0 with derefs=2:
+./escape_param.go:244:14:   flow: ~r0 = **p:
+./escape_param.go:244:14:     from *p (indirection) at ./escape_param.go:245:10
+./escape_param.go:244:14:     from *(*p) (indirection) at ./escape_param.go:245:9
+./escape_param.go:244:14:     from return *(*p) (return) at ./escape_param.go:245:2
+./escape_param.go:244:14: leaking param: p to result ~r0 level=2
+./escape_param.go:256:2: i escapes to heap:
+./escape_param.go:256:2:   flow: p = &i:
+./escape_param.go:256:2:     from &i (address-of) at ./escape_param.go:257:7
+./escape_param.go:256:2:     from p := &i (assign) at ./escape_param.go:257:4
+./escape_param.go:256:2:   flow: p2 = &p:
+./escape_param.go:256:2:     from &p (address-of) at ./escape_param.go:258:8
+./escape_param.go:256:2:     from p2 := &p (assign) at ./escape_param.go:258:5
+./escape_param.go:256:2:   flow: {heap} = *p2:
+./escape_param.go:256:2:     from &p2 (address-of) at ./escape_param.go:259:17
+./escape_param.go:256:2:     from param10(&p2) (call parameter) at ./escape_param.go:259:16
+./escape_param.go:256:2:     from param10(&p2) (interface-converted) at ./escape_param.go:259:16
+./escape_param.go:256:2:     from sink = param10(&p2) (assign) at ./escape_param.go:259:7
+my global ref escape count 10
+./escape_param.go:256:2: moved to heap: i
+./escape_param.go:263:14: i escapes to heap:
+./escape_param.go:263:14:   flow: ~r0 = &i:
+./escape_param.go:263:14:     from &i (address-of) at ./escape_param.go:264:9
+./escape_param.go:263:14:     from return &i (return) at ./escape_param.go:264:2
+my return escape count 1 
+./escape_param.go:263:14: parameter i leaks to ~r0 with derefs=0:
+./escape_param.go:263:14:   flow: ~r0 = &i:
+./escape_param.go:263:14:     from &i (address-of) at ./escape_param.go:264:9
+./escape_param.go:263:14:     from return &i (return) at ./escape_param.go:264:2
+./escape_param.go:263:14: moved to heap: i
+./escape_param.go:269:2: p escapes to heap:
+./escape_param.go:269:2:   flow: {heap} = &p:
+./escape_param.go:269:2:     from &p (address-of) at ./escape_param.go:270:14
+./escape_param.go:269:2:     from param11(&p) (call parameter) at ./escape_param.go:270:13
+my callparam ref escape count 9
+./escape_param.go:268:2: i escapes to heap:
+./escape_param.go:268:2:   flow: p = &i:
+./escape_param.go:268:2:     from &i (address-of) at ./escape_param.go:269:7
+./escape_param.go:268:2:     from p := &i (assign) at ./escape_param.go:269:4
+my callparam ref escape count 10
+./escape_param.go:268:2: moved to heap: i
+./escape_param.go:269:2: moved to heap: p
+./escape_param.go:275:2: p escapes to heap:
+./escape_param.go:275:2:   flow: {heap} = &p:
+./escape_param.go:275:2:     from &p (address-of) at ./escape_param.go:276:17
+./escape_param.go:275:2:     from param11(&p) (call parameter) at ./escape_param.go:276:16
+my callparam ref escape count 11
+./escape_param.go:274:2: i escapes to heap:
+./escape_param.go:274:2:   flow: p = &i:
+./escape_param.go:274:2:     from &i (address-of) at ./escape_param.go:275:7
+./escape_param.go:274:2:     from p := &i (assign) at ./escape_param.go:275:4
+my callparam ref escape count 12
+./escape_param.go:274:2: moved to heap: i
+./escape_param.go:275:2: moved to heap: p
+./escape_param.go:281:2: p escapes to heap:
+./escape_param.go:281:2:   flow: {heap} = &p:
+./escape_param.go:281:2:     from &p (address-of) at ./escape_param.go:282:18
+./escape_param.go:281:2:     from param11(&p) (call parameter) at ./escape_param.go:282:17
+my callparam ref escape count 13
+./escape_param.go:280:2: i escapes to heap:
+./escape_param.go:280:2:   flow: p = &i:
+./escape_param.go:280:2:     from &i (address-of) at ./escape_param.go:281:7
+./escape_param.go:280:2:     from p := &i (assign) at ./escape_param.go:281:4
+my callparam ref escape count 14
+./escape_param.go:280:2: moved to heap: i
+./escape_param.go:281:2: moved to heap: p
+./escape_param.go:287:2: p escapes to heap:
+./escape_param.go:287:2:   flow: p2 = &p:
+./escape_param.go:287:2:     from &p (address-of) at ./escape_param.go:288:8
+./escape_param.go:287:2:     from p2 := &p (assign) at ./escape_param.go:288:5
+./escape_param.go:287:2:   flow: {heap} = p2:
+./escape_param.go:287:2:     from param11(p2) (call parameter) at ./escape_param.go:289:16
+my callparam ref escape count 15
+./escape_param.go:286:2: i escapes to heap:
+./escape_param.go:286:2:   flow: p = &i:
+./escape_param.go:286:2:     from &i (address-of) at ./escape_param.go:287:7
+./escape_param.go:286:2:     from p := &i (assign) at ./escape_param.go:287:4
+my callparam ref escape count 16
+./escape_param.go:286:2: moved to heap: i
+./escape_param.go:287:2: moved to heap: p
+./escape_param.go:297:25: i escapes to heap:
+./escape_param.go:297:25:   flow: {heap} = &i:
+./escape_param.go:297:25:     from &i (address-of) at ./escape_param.go:298:8
+./escape_param.go:297:25:     from r.p = &i (assign) at ./escape_param.go:298:6
+my func_param ref escape count 1
+./escape_param.go:297:7: r does not escape
+./escape_param.go:297:25: moved to heap: i
+./escape_param.go:303:2: p escapes to heap:
+./escape_param.go:303:2:   flow: {heap} = &p:
+./escape_param.go:303:2:     from &p (address-of) at ./escape_param.go:305:12
+./escape_param.go:303:2:     from (*Indir).param12(r, &p) (call parameter) at ./escape_param.go:305:11
+my callparam ref escape count 17
+./escape_param.go:302:2: i escapes to heap:
+./escape_param.go:302:2:   flow: p = &i:
+./escape_param.go:302:2:     from &i (address-of) at ./escape_param.go:303:7
+./escape_param.go:302:2:     from p := &i (assign) at ./escape_param.go:303:4
+my callparam ref escape count 18
+./escape_param.go:302:2: moved to heap: i
+./escape_param.go:303:2: moved to heap: p
+./escape_param.go:311:2: p escapes to heap:
+./escape_param.go:311:2:   flow: {heap} = &p:
+./escape_param.go:311:2:     from &p (address-of) at ./escape_param.go:313:12
+./escape_param.go:311:2:     from (*Indir).param12(r, &p) (call parameter) at ./escape_param.go:313:11
+my callparam ref escape count 19
+./escape_param.go:310:2: i escapes to heap:
+./escape_param.go:310:2:   flow: p = &i:
+./escape_param.go:310:2:     from &i (address-of) at ./escape_param.go:311:7
+./escape_param.go:310:2:     from p := &i (assign) at ./escape_param.go:311:4
+my callparam ref escape count 20
+./escape_param.go:310:2: moved to heap: i
+./escape_param.go:311:2: moved to heap: p
+./escape_param.go:312:7: &Indir{} does not escape
+./escape_param.go:319:2: p escapes to heap:
+./escape_param.go:319:2:   flow: {heap} = &p:
+./escape_param.go:319:2:     from &p (address-of) at ./escape_param.go:321:12
+./escape_param.go:319:2:     from (*Indir).param12(r, &p) (call parameter) at ./escape_param.go:321:11
+my callparam ref escape count 21
+./escape_param.go:318:2: i escapes to heap:
+./escape_param.go:318:2:   flow: p = &i:
+./escape_param.go:318:2:     from &i (address-of) at ./escape_param.go:319:7
+./escape_param.go:318:2:     from p := &i (assign) at ./escape_param.go:319:4
+my callparam ref escape count 22
+./escape_param.go:318:2: moved to heap: i
+./escape_param.go:319:2: moved to heap: p
+./escape_param.go:327:2: p escapes to heap:
+./escape_param.go:327:2:   flow: {heap} = &p:
+./escape_param.go:327:2:     from &p (address-of) at ./escape_param.go:329:12
+./escape_param.go:327:2:     from (*Indir).param12(r, &p) (call parameter) at ./escape_param.go:329:11
+my callparam ref escape count 23
+./escape_param.go:326:2: i escapes to heap:
+./escape_param.go:326:2:   flow: p = &i:
+./escape_param.go:326:2:     from &i (address-of) at ./escape_param.go:327:7
+./escape_param.go:326:2:     from p := &i (assign) at ./escape_param.go:327:4
+my callparam ref escape count 24
+./escape_param.go:326:2: moved to heap: i
+./escape_param.go:327:2: moved to heap: p
+./escape_param.go:338:22: parameter i leaks to {heap} with derefs=0:
+./escape_param.go:338:22:   flow: {heap} = i:
+./escape_param.go:338:22:     from *v.p = i (assign) at ./escape_param.go:339:7
+./escape_param.go:338:7: v does not escape
+./escape_param.go:338:22: leaking param: i
+./escape_param.go:343:2: i escapes to heap:
+./escape_param.go:343:2:   flow: {heap} = &i:
+./escape_param.go:343:2:     from &i (address-of) at ./escape_param.go:347:12
+./escape_param.go:343:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:347:11
+my callparam ref escape count 25
+./escape_param.go:343:2: moved to heap: i
+./escape_param.go:352:2: i escapes to heap:
+./escape_param.go:352:2:   flow: {heap} = &i:
+./escape_param.go:352:2:     from &i (address-of) at ./escape_param.go:355:12
+./escape_param.go:352:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:355:11
+my callparam ref escape count 26
+./escape_param.go:352:2: moved to heap: i
+./escape_param.go:360:2: i escapes to heap:
+./escape_param.go:360:2:   flow: {heap} = &i:
+./escape_param.go:360:2:     from &i (address-of) at ./escape_param.go:363:12
+./escape_param.go:360:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:363:11
+my callparam ref escape count 27
+./escape_param.go:360:2: moved to heap: i
+./escape_param.go:362:7: &Val{...} does not escape
+./escape_param.go:368:2: i escapes to heap:
+./escape_param.go:368:2:   flow: {heap} = &i:
+./escape_param.go:368:2:     from &i (address-of) at ./escape_param.go:372:12
+./escape_param.go:368:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:372:11
+my callparam ref escape count 28
+./escape_param.go:369:6: p escapes to heap:
+./escape_param.go:369:6:   flow: v = &p:
+./escape_param.go:369:6:     from &p (address-of) at ./escape_param.go:371:8
+./escape_param.go:369:6:     from v.p = &p (assign) at ./escape_param.go:371:6
+./escape_param.go:369:6:   flow: {heap} = v:
+./escape_param.go:369:6:     from v (interface-converted) at ./escape_param.go:373:9
+./escape_param.go:369:6:     from sink = v (assign) at ./escape_param.go:373:7
+my global ref escape count 11
+./escape_param.go:368:2: moved to heap: i
+./escape_param.go:369:6: moved to heap: p
+./escape_param.go:377:2: i escapes to heap:
+./escape_param.go:377:2:   flow: {heap} = &i:
+./escape_param.go:377:2:     from &i (address-of) at ./escape_param.go:380:12
+./escape_param.go:377:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:380:11
+my callparam ref escape count 29
+./escape_param.go:378:6: p escapes to heap:
+./escape_param.go:378:6:   flow: v = &p:
+./escape_param.go:378:6:     from &p (address-of) at ./escape_param.go:379:11
+./escape_param.go:378:6:     from Val{...} (struct literal element) at ./escape_param.go:379:10
+./escape_param.go:378:6:     from v := Val{...} (assign) at ./escape_param.go:379:4
+./escape_param.go:378:6:   flow: {heap} = v:
+./escape_param.go:378:6:     from v (interface-converted) at ./escape_param.go:381:9
+./escape_param.go:378:6:     from sink = v (assign) at ./escape_param.go:381:7
+my global ref escape count 12
+./escape_param.go:377:2: moved to heap: i
+./escape_param.go:378:6: moved to heap: p
+./escape_param.go:385:2: i escapes to heap:
+./escape_param.go:385:2:   flow: {heap} = &i:
+./escape_param.go:385:2:     from &i (address-of) at ./escape_param.go:388:12
+./escape_param.go:385:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:388:11
+my callparam ref escape count 30
+./escape_param.go:387:7: &Val{...} escapes to heap:
+./escape_param.go:387:7:   flow: v = &{storage for &Val{...}}:
+./escape_param.go:387:7:     from &Val{...} (spill) at ./escape_param.go:387:7
+./escape_param.go:387:7:     from v := &Val{...} (assign) at ./escape_param.go:387:4
+./escape_param.go:387:7:   flow: {heap} = v:
+./escape_param.go:387:7:     from v (interface-converted) at ./escape_param.go:389:9
+./escape_param.go:387:7:     from sink = v (assign) at ./escape_param.go:389:7
+my global ref escape count 13
+./escape_param.go:386:6: p escapes to heap:
+./escape_param.go:386:6:   flow: {storage for &Val{...}} = &p:
+./escape_param.go:386:6:     from &p (address-of) at ./escape_param.go:387:12
+./escape_param.go:386:6:     from Val{...} (struct literal element) at ./escape_param.go:387:11
+my global ref escape count 14
+./escape_param.go:385:2: moved to heap: i
+./escape_param.go:386:6: moved to heap: p
+./escape_param.go:387:7: &Val{...} escapes to heap
+./escape_param.go:393:2: i escapes to heap:
+./escape_param.go:393:2:   flow: {heap} = &i:
+./escape_param.go:393:2:     from &i (address-of) at ./escape_param.go:396:12
+./escape_param.go:393:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:396:11
+my callparam ref escape count 31
+./escape_param.go:393:2: moved to heap: i
+./escape_param.go:401:2: i escapes to heap:
+./escape_param.go:401:2:   flow: {heap} = &i:
+./escape_param.go:401:2:     from &i (address-of) at ./escape_param.go:404:12
+./escape_param.go:401:2:     from Val.param13(v, &i) (call parameter) at ./escape_param.go:404:11
+my callparam ref escape count 32
+./escape_param.go:405:9: *(*v.p) escapes to heap:
+./escape_param.go:405:9:   flow: {heap} = &{storage for *(*v.p)}:
+./escape_param.go:405:9:     from *(*v.p) (spill) at ./escape_param.go:405:9
+./escape_param.go:405:9:     from sink = *(*v.p) (assign) at ./escape_param.go:405:7
+my global ref escape count 15
+./escape_param.go:401:2: moved to heap: i
+./escape_param.go:403:7: &Val{...} does not escape
+./escape_param.go:405:9: *(*v.p) escapes to heap
+./escape_param.go:415:9: &Node{...} escapes to heap:
+./escape_param.go:415:9:   flow: {heap} = &{storage for &Node{...}}:
+./escape_param.go:415:9:     from &Node{...} (spill) at ./escape_param.go:415:9
+./escape_param.go:415:9:     from Sink = &Node{...} (assign) at ./escape_param.go:415:7
+my global ref escape count 16
+./escape_param.go:414:8: parameter x leaks to {storage for &Node{...}} with derefs=1:
+./escape_param.go:414:8:   flow: {storage for &Node{...}} = *x:
+./escape_param.go:414:8:     from x.p (dot of pointer) at ./escape_param.go:415:16
+./escape_param.go:414:8:     from Node{...} (struct literal element) at ./escape_param.go:415:14
+./escape_param.go:414:8: leaking param content: x
+./escape_param.go:415:9: &Node{...} escapes to heap
+./escape_param.go:419:9: &Node{...} escapes to heap:
+./escape_param.go:419:9:   flow: ~r0 = &{storage for &Node{...}}:
+./escape_param.go:419:9:     from &Node{...} (spill) at ./escape_param.go:419:9
+./escape_param.go:419:9:     from return &Node{...} (return) at ./escape_param.go:419:2
+my return escape count 2 
+./escape_param.go:418:8: parameter x leaks to {storage for &Node{...}} with derefs=1:
+./escape_param.go:418:8:   flow: {storage for &Node{...}} = *x:
+./escape_param.go:418:8:     from x.p (dot of pointer) at ./escape_param.go:419:16
+./escape_param.go:418:8:     from Node{...} (struct literal element) at ./escape_param.go:419:14
+./escape_param.go:418:8: leaking param content: x
+./escape_param.go:419:9: &Node{...} escapes to heap
+./escape_param.go:422:8: parameter x leaks to {heap} with derefs=0:
+./escape_param.go:422:8:   flow: {storage for &Node{...}} = x:
+./escape_param.go:422:8:     from Node{...} (struct literal element) at ./escape_param.go:423:12
+./escape_param.go:422:8:   flow: y = &{storage for &Node{...}}:
+./escape_param.go:422:8:     from &Node{...} (spill) at ./escape_param.go:423:7
+./escape_param.go:422:8:     from y := &Node{...} (assign) at ./escape_param.go:423:4
+./escape_param.go:422:8:   flow: {heap} = *y:
+./escape_param.go:422:8:     from g(y) (call parameter) at ./escape_param.go:424:10
+./escape_param.go:422:8: leaking param: x
+./escape_param.go:423:7: &Node{...} does not escape
+./escape_param.go:434:9: x escapes to heap:
+./escape_param.go:434:9:   flow: ~r0 = &{storage for x}:
+./escape_param.go:434:9:     from x (spill) at ./escape_param.go:434:9
+./escape_param.go:434:9:     from return x (return) at ./escape_param.go:434:2
+my return escape count 3 
+./escape_param.go:433:15: parameter x leaks to {storage for x} with derefs=0:
+./escape_param.go:433:15:   flow: {storage for x} = x:
+./escape_param.go:433:15:     from x (interface-converted) at ./escape_param.go:434:9
+./escape_param.go:433:15: leaking param: x
+./escape_param.go:434:9: x escapes to heap
+./escape_param.go:439:15: parameter x leaks to ~r0 with derefs=0:
+./escape_param.go:439:15:   flow: ~r0 = x:
+./escape_param.go:439:15:     from x (interface-converted) at ./escape_param.go:440:9
+./escape_param.go:439:15:     from return x (return) at ./escape_param.go:440:2
+./escape_param.go:439:15: leaking param: x to result ~r0 level=0
+./escape_param.go:338:22: parameter i leaks to {heap} with derefs=0:
+./escape_param.go:338:22:   flow: {heap} = i:
+./escape_param.go:338:22:     from Val.param13(v, i) (call parameter) at <autogenerated>:1
+return too_large dynamic_alloc global outerloop indirect coroutine callparam unknown
+*****#9# 3 0 0 16 0 0 0 32 0 #

@@ -68,11 +68,23 @@ func return3() *int {
 	return t
 }
 */
-var kg any = new(int)
 
-func duff() {
-	k := new(int)
-	_ = k
+// GetOSVersion returns OS version, kernel and bitness
+//
+//	func GetOSVersion(b []byte) (k string) {
+//		k = string(b)
+//		return
+//	}
+type Address struct {
+	Name    string // Proper name; may be empty.
+	Address string // user@domain
+}
+
+func hhh() []*Address {
+	return []*Address{{
+		Name:    "111",
+		Address: "spec",
+	}}
 }
 
 // Uitoa converts val to a decimal string.

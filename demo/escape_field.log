@@ -1,0 +1,283 @@
+# command-line-arguments
+./escape_field.go:24:2: i escapes to heap:
+./escape_field.go:24:2:   flow: x = &i:
+./escape_field.go:24:2:     from &i (address-of) at ./escape_field.go:26:9
+./escape_field.go:24:2:     from x.p1 = &i (assign) at ./escape_field.go:26:7
+./escape_field.go:24:2:   flow: {heap} = x:
+./escape_field.go:24:2:     from x.p1 (dot) at ./escape_field.go:27:10
+./escape_field.go:24:2:     from x.p1 (interface-converted) at ./escape_field.go:27:10
+./escape_field.go:24:2:     from sink = x.p1 (assign) at ./escape_field.go:27:7
+my global ref escape count 1
+./escape_field.go:24:2: moved to heap: i
+./escape_field.go:31:2: i escapes to heap:
+./escape_field.go:31:2:   flow: x = &i:
+./escape_field.go:31:2:     from &i (address-of) at ./escape_field.go:34:9
+./escape_field.go:31:2:     from x.p1 = &i (assign) at ./escape_field.go:34:7
+./escape_field.go:31:2:   flow: {heap} = x:
+./escape_field.go:31:2:     from x.p2 (dot) at ./escape_field.go:35:10
+./escape_field.go:31:2:     from x.p2 (interface-converted) at ./escape_field.go:35:10
+./escape_field.go:31:2:     from sink = x.p2 (assign) at ./escape_field.go:35:7
+my global ref escape count 2
+./escape_field.go:31:2: moved to heap: i
+./escape_field.go:42:9: x escapes to heap:
+./escape_field.go:42:9:   flow: {heap} = &{storage for x}:
+./escape_field.go:42:9:     from x (spill) at ./escape_field.go:42:9
+./escape_field.go:42:9:     from sink = x (assign) at ./escape_field.go:42:7
+my global ref escape count 3
+./escape_field.go:39:2: i escapes to heap:
+./escape_field.go:39:2:   flow: x = &i:
+./escape_field.go:39:2:     from &i (address-of) at ./escape_field.go:41:9
+./escape_field.go:39:2:     from x.p1 = &i (assign) at ./escape_field.go:41:7
+./escape_field.go:39:2:   flow: {storage for x} = x:
+./escape_field.go:39:2:     from x (interface-converted) at ./escape_field.go:42:9
+my global ref escape count 4
+./escape_field.go:39:2: moved to heap: i
+./escape_field.go:42:9: x escapes to heap
+./escape_field.go:50:9: x escapes to heap:
+./escape_field.go:50:9:   flow: {heap} = &{storage for x}:
+./escape_field.go:50:9:     from x (spill) at ./escape_field.go:50:9
+./escape_field.go:50:9:     from sink = x (assign) at ./escape_field.go:50:7
+my global ref escape count 5
+./escape_field.go:46:2: i escapes to heap:
+./escape_field.go:46:2:   flow: y = &i:
+./escape_field.go:46:2:     from &i (address-of) at ./escape_field.go:48:11
+./escape_field.go:46:2:     from y.x.p1 = &i (assign) at ./escape_field.go:48:9
+./escape_field.go:46:2:   flow: x = y:
+./escape_field.go:46:2:     from y.x (dot) at ./escape_field.go:49:8
+./escape_field.go:46:2:     from x := y.x (assign) at ./escape_field.go:49:4
+./escape_field.go:46:2:   flow: {storage for x} = x:
+./escape_field.go:46:2:     from x (interface-converted) at ./escape_field.go:50:9
+my global ref escape count 6
+./escape_field.go:46:2: moved to heap: i
+./escape_field.go:50:9: x escapes to heap
+./escape_field.go:54:2: i escapes to heap:
+./escape_field.go:54:2:   flow: x = &i:
+./escape_field.go:54:2:     from &i (address-of) at ./escape_field.go:57:11
+./escape_field.go:54:2:     from x.a[0] = &i (assign) at ./escape_field.go:57:9
+./escape_field.go:54:2:   flow: {heap} = x:
+./escape_field.go:54:2:     from x.a (dot) at ./escape_field.go:58:10
+./escape_field.go:54:2:     from x.a[1] (fixed-array-index-of) at ./escape_field.go:58:12
+./escape_field.go:54:2:     from x.a[1] (interface-converted) at ./escape_field.go:58:12
+./escape_field.go:54:2:     from sink = x.a[1] (assign) at ./escape_field.go:58:7
+my global ref escape count 7
+./escape_field.go:54:2: moved to heap: i
+./escape_field.go:62:13: parameter x leaks to {heap} with derefs=1:
+./escape_field.go:62:13:   flow: {heap} = *x:
+./escape_field.go:62:13:     from x.p2 (dot of pointer) at ./escape_field.go:63:10
+./escape_field.go:62:13:     from x.p2 (interface-converted) at ./escape_field.go:63:10
+./escape_field.go:62:13:     from sink = x.p2 (assign) at ./escape_field.go:63:7
+./escape_field.go:62:13: leaking param content: x
+./escape_field.go:67:2: i escapes to heap:
+./escape_field.go:67:2:   flow: x = &i:
+./escape_field.go:67:2:     from &i (address-of) at ./escape_field.go:70:9
+./escape_field.go:67:2:     from x.p1 = &i (assign) at ./escape_field.go:70:7
+./escape_field.go:67:2:   flow: {heap} = x:
+./escape_field.go:67:2:     from &x (address-of) at ./escape_field.go:71:9
+./escape_field.go:67:2:     from field6(&x) (call parameter) at ./escape_field.go:71:8
+my callparam ref escape count 1
+./escape_field.go:67:2: moved to heap: i
+./escape_field.go:85:2: i escapes to heap:
+./escape_field.go:85:2:   flow: y = &i:
+./escape_field.go:85:2:     from &i (address-of) at ./escape_field.go:87:11
+./escape_field.go:85:2:     from y.x.p1 = &i (assign) at ./escape_field.go:87:9
+./escape_field.go:85:2:   flow: x = y:
+./escape_field.go:85:2:     from y.x (dot) at ./escape_field.go:88:8
+./escape_field.go:85:2:     from x := y.x (assign) at ./escape_field.go:88:4
+./escape_field.go:85:2:   flow: y1 = x:
+./escape_field.go:85:2:     from y1.x = x (assign) at ./escape_field.go:90:7
+./escape_field.go:85:2:   flow: {heap} = y1:
+./escape_field.go:85:2:     from y1.x (dot) at ./escape_field.go:91:11
+./escape_field.go:85:2:     from y1.x.p1 (dot) at ./escape_field.go:91:13
+./escape_field.go:85:2:     from y1.x.p1 (interface-converted) at ./escape_field.go:91:13
+./escape_field.go:85:2:     from sink = y1.x.p1 (assign) at ./escape_field.go:91:7
+my global ref escape count 8
+./escape_field.go:85:2: moved to heap: i
+./escape_field.go:101:11: y1.x escapes to heap:
+./escape_field.go:101:11:   flow: {heap} = &{storage for y1.x}:
+./escape_field.go:101:11:     from y1.x (spill) at ./escape_field.go:101:11
+./escape_field.go:101:11:     from sink = y1.x (assign) at ./escape_field.go:101:7
+my global ref escape count 9
+./escape_field.go:95:2: i escapes to heap:
+./escape_field.go:95:2:   flow: y = &i:
+./escape_field.go:95:2:     from &i (address-of) at ./escape_field.go:97:11
+./escape_field.go:95:2:     from y.x.p1 = &i (assign) at ./escape_field.go:97:9
+./escape_field.go:95:2:   flow: x = y:
+./escape_field.go:95:2:     from y.x (dot) at ./escape_field.go:98:8
+./escape_field.go:95:2:     from x := y.x (assign) at ./escape_field.go:98:4
+./escape_field.go:95:2:   flow: y1 = x:
+./escape_field.go:95:2:     from y1.x = x (assign) at ./escape_field.go:100:7
+./escape_field.go:95:2:   flow: {storage for y1.x} = y1:
+./escape_field.go:95:2:     from y1.x (dot) at ./escape_field.go:101:11
+./escape_field.go:95:2:     from y1.x (interface-converted) at ./escape_field.go:101:11
+my global ref escape count 10
+./escape_field.go:95:2: moved to heap: i
+./escape_field.go:101:11: y1.x escapes to heap
+./escape_field.go:105:2: i escapes to heap:
+./escape_field.go:105:2:   flow: y = &i:
+./escape_field.go:105:2:     from &i (address-of) at ./escape_field.go:108:11
+./escape_field.go:105:2:     from y.x.p1 = &i (assign) at ./escape_field.go:108:9
+./escape_field.go:105:2:   flow: x = y:
+./escape_field.go:105:2:     from y.x (dot) at ./escape_field.go:109:8
+./escape_field.go:105:2:     from x := y.x (assign) at ./escape_field.go:109:4
+./escape_field.go:105:2:   flow: y1 = x:
+./escape_field.go:105:2:     from y1.x = x (assign) at ./escape_field.go:111:7
+./escape_field.go:105:2:   flow: {heap} = y1:
+./escape_field.go:105:2:     from y1.x (dot) at ./escape_field.go:112:11
+./escape_field.go:105:2:     from y1.x.p2 (dot) at ./escape_field.go:112:13
+./escape_field.go:105:2:     from y1.x.p2 (interface-converted) at ./escape_field.go:112:13
+./escape_field.go:105:2:     from sink = y1.x.p2 (assign) at ./escape_field.go:112:7
+my global ref escape count 11
+./escape_field.go:105:2: moved to heap: i
+./escape_field.go:116:2: i escapes to heap:
+./escape_field.go:116:2:   flow: x = &i:
+./escape_field.go:116:2:     from &i (address-of) at ./escape_field.go:117:13
+./escape_field.go:116:2:     from X{...} (struct literal element) at ./escape_field.go:117:8
+./escape_field.go:116:2:     from x := X{...} (assign) at ./escape_field.go:117:4
+./escape_field.go:116:2:   flow: {heap} = x:
+./escape_field.go:116:2:     from x.p1 (dot) at ./escape_field.go:118:10
+./escape_field.go:116:2:     from x.p1 (interface-converted) at ./escape_field.go:118:10
+./escape_field.go:116:2:     from sink = x.p1 (assign) at ./escape_field.go:118:7
+my global ref escape count 12
+./escape_field.go:116:2: moved to heap: i
+./escape_field.go:122:2: i escapes to heap:
+./escape_field.go:122:2:   flow: x = &i:
+./escape_field.go:122:2:     from &i (address-of) at ./escape_field.go:124:13
+./escape_field.go:122:2:     from X{...} (struct literal element) at ./escape_field.go:124:8
+./escape_field.go:122:2:     from x := X{...} (assign) at ./escape_field.go:124:4
+./escape_field.go:122:2:   flow: {heap} = x:
+./escape_field.go:122:2:     from x.p2 (dot) at ./escape_field.go:125:10
+./escape_field.go:122:2:     from x.p2 (interface-converted) at ./escape_field.go:125:10
+./escape_field.go:122:2:     from sink = x.p2 (assign) at ./escape_field.go:125:7
+my global ref escape count 13
+./escape_field.go:122:2: moved to heap: i
+./escape_field.go:129:2: i escapes to heap:
+./escape_field.go:129:2:   flow: {storage for &X{...}} = &i:
+./escape_field.go:129:2:     from &i (address-of) at ./escape_field.go:130:14
+./escape_field.go:129:2:     from X{...} (struct literal element) at ./escape_field.go:130:9
+./escape_field.go:129:2:   flow: x = &{storage for &X{...}}:
+./escape_field.go:129:2:     from &X{...} (spill) at ./escape_field.go:130:7
+./escape_field.go:129:2:     from x := &X{...} (assign) at ./escape_field.go:130:4
+./escape_field.go:129:2:   flow: {heap} = *x:
+./escape_field.go:129:2:     from x.p1 (dot of pointer) at ./escape_field.go:131:10
+./escape_field.go:129:2:     from x.p1 (interface-converted) at ./escape_field.go:131:10
+./escape_field.go:129:2:     from sink = x.p1 (assign) at ./escape_field.go:131:7
+my global ref escape count 14
+./escape_field.go:129:2: moved to heap: i
+./escape_field.go:130:7: &X{...} does not escape
+./escape_field.go:135:2: i escapes to heap:
+./escape_field.go:135:2:   flow: {storage for &X{...}} = &i:
+./escape_field.go:135:2:     from &i (address-of) at ./escape_field.go:137:14
+./escape_field.go:135:2:     from X{...} (struct literal element) at ./escape_field.go:137:9
+./escape_field.go:135:2:   flow: x = &{storage for &X{...}}:
+./escape_field.go:135:2:     from &X{...} (spill) at ./escape_field.go:137:7
+./escape_field.go:135:2:     from x := &X{...} (assign) at ./escape_field.go:137:4
+./escape_field.go:135:2:   flow: {heap} = *x:
+./escape_field.go:135:2:     from x.p2 (dot of pointer) at ./escape_field.go:138:10
+./escape_field.go:135:2:     from x.p2 (interface-converted) at ./escape_field.go:138:10
+./escape_field.go:135:2:     from sink = x.p2 (assign) at ./escape_field.go:138:7
+my global ref escape count 15
+./escape_field.go:135:2: moved to heap: i
+./escape_field.go:137:7: &X{...} does not escape
+./escape_field.go:143:7: &X{...} escapes to heap:
+./escape_field.go:143:7:   flow: x = &{storage for &X{...}}:
+./escape_field.go:143:7:     from &X{...} (spill) at ./escape_field.go:143:7
+./escape_field.go:143:7:     from x := &X{...} (assign) at ./escape_field.go:143:4
+./escape_field.go:143:7:   flow: {heap} = x:
+./escape_field.go:143:7:     from x (interface-converted) at ./escape_field.go:144:9
+./escape_field.go:143:7:     from sink = x (assign) at ./escape_field.go:144:7
+my global ref escape count 16
+./escape_field.go:142:2: i escapes to heap:
+./escape_field.go:142:2:   flow: {storage for &X{...}} = &i:
+./escape_field.go:142:2:     from &i (address-of) at ./escape_field.go:143:14
+./escape_field.go:142:2:     from X{...} (struct literal element) at ./escape_field.go:143:9
+my global ref escape count 17
+./escape_field.go:142:2: moved to heap: i
+./escape_field.go:143:7: &X{...} escapes to heap
+./escape_field.go:148:2: i escapes to heap:
+./escape_field.go:148:2:   flow: x = &i:
+./escape_field.go:148:2:     from &i (address-of) at ./escape_field.go:151:9
+./escape_field.go:148:2:     from x.p1 = &i (assign) at ./escape_field.go:151:7
+./escape_field.go:148:2:   flow: {storage for x} = x:
+./escape_field.go:148:2:     from x (interface-converted) at ./escape_field.go:152:26
+./escape_field.go:148:2:   flow: iface = &{storage for x}:
+./escape_field.go:148:2:     from x (spill) at ./escape_field.go:152:26
+./escape_field.go:148:2:     from iface := x (assign) at ./escape_field.go:152:6
+./escape_field.go:148:2:   flow: x1 = *iface:
+./escape_field.go:148:2:     from iface.(X) (dot) at ./escape_field.go:153:13
+./escape_field.go:148:2:     from x1 := iface.(X) (assign) at ./escape_field.go:153:5
+./escape_field.go:148:2:   flow: {heap} = x1:
+./escape_field.go:148:2:     from x1.p2 (dot) at ./escape_field.go:154:11
+./escape_field.go:148:2:     from x1.p2 (interface-converted) at ./escape_field.go:154:11
+./escape_field.go:148:2:     from sink = x1.p2 (assign) at ./escape_field.go:154:7
+my global ref escape count 18
+./escape_field.go:148:2: moved to heap: i
+./escape_field.go:152:26: x does not escape
+./escape_field.go:158:2: i escapes to heap:
+./escape_field.go:158:2:   flow: x = &i:
+./escape_field.go:158:2:     from &i (address-of) at ./escape_field.go:160:9
+./escape_field.go:158:2:     from x.p1 = &i (assign) at ./escape_field.go:160:7
+./escape_field.go:158:2:   flow: {storage for x} = x:
+./escape_field.go:158:2:     from x (interface-converted) at ./escape_field.go:161:26
+./escape_field.go:158:2:   flow: iface = &{storage for x}:
+./escape_field.go:158:2:     from x (spill) at ./escape_field.go:161:26
+./escape_field.go:158:2:     from iface := x (assign) at ./escape_field.go:161:6
+./escape_field.go:158:2:   flow: x1 = *iface:
+./escape_field.go:158:2:     from iface.(X) (dot) at ./escape_field.go:162:13
+./escape_field.go:158:2:     from x1 := iface.(X) (assign) at ./escape_field.go:162:5
+./escape_field.go:158:2:   flow: {heap} = x1:
+./escape_field.go:158:2:     from x1.p1 (dot) at ./escape_field.go:163:11
+./escape_field.go:158:2:     from x1.p1 (interface-converted) at ./escape_field.go:163:11
+./escape_field.go:158:2:     from sink = x1.p1 (assign) at ./escape_field.go:163:7
+my global ref escape count 19
+./escape_field.go:158:2: moved to heap: i
+./escape_field.go:161:26: x does not escape
+./escape_field.go:173:9: y escapes to heap:
+./escape_field.go:173:9:   flow: {heap} = &{storage for y}:
+./escape_field.go:173:9:     from y (spill) at ./escape_field.go:173:9
+./escape_field.go:173:9:     from sink = y (assign) at ./escape_field.go:173:7
+my global ref escape count 20
+./escape_field.go:167:2: i escapes to heap:
+./escape_field.go:167:2:   flow: x = &i:
+./escape_field.go:167:2:     from &i (address-of) at ./escape_field.go:170:9
+./escape_field.go:167:2:     from x.p1 = &i (assign) at ./escape_field.go:170:7
+./escape_field.go:167:2:   flow: {storage for x} = x:
+./escape_field.go:167:2:     from x (interface-converted) at ./escape_field.go:171:26
+./escape_field.go:167:2:   flow: iface = &{storage for x}:
+./escape_field.go:167:2:     from x (spill) at ./escape_field.go:171:26
+./escape_field.go:167:2:     from iface := x (assign) at ./escape_field.go:171:6
+./escape_field.go:167:2:   flow: .autotmp_4 = *iface:
+./escape_field.go:167:2:     from iface.(Y) (dot) at ./escape_field.go:172:15
+./escape_field.go:167:2:     from .autotmp_4, .autotmp_5 := iface.(Y) (assign-pair-dot-type) at ./escape_field.go:172:7
+./escape_field.go:167:2:   flow: y = .autotmp_4:
+./escape_field.go:167:2:     from y, _ := Y(.autotmp_4), .autotmp_5 (assign-pair) at ./escape_field.go:172:7
+./escape_field.go:167:2:   flow: {storage for y} = y:
+./escape_field.go:167:2:     from y (interface-converted) at ./escape_field.go:173:9
+my global ref escape count 21
+./escape_field.go:167:2: moved to heap: i
+./escape_field.go:171:26: x does not escape
+./escape_field.go:173:9: y escapes to heap
+./escape_field.go:184:9: x1 escapes to heap:
+./escape_field.go:184:9:   flow: {heap} = &{storage for x1}:
+./escape_field.go:184:9:     from x1 (spill) at ./escape_field.go:184:9
+./escape_field.go:184:9:     from sink = x1 (assign) at ./escape_field.go:184:7
+my global ref escape count 22
+./escape_field.go:178:2: i escapes to heap:
+./escape_field.go:178:2:   flow: x = &i:
+./escape_field.go:178:2:     from &i (address-of) at ./escape_field.go:181:9
+./escape_field.go:178:2:     from x.p1 = &i (assign) at ./escape_field.go:181:7
+./escape_field.go:178:2:   flow: {storage for x} = x:
+./escape_field.go:178:2:     from x (interface-converted) at ./escape_field.go:182:26
+./escape_field.go:178:2:   flow: iface = &{storage for x}:
+./escape_field.go:178:2:     from x (spill) at ./escape_field.go:182:26
+./escape_field.go:178:2:     from iface := x (assign) at ./escape_field.go:182:6
+./escape_field.go:178:2:   flow: x1 = *iface:
+./escape_field.go:178:2:     from iface.(X) (dot) at ./escape_field.go:183:13
+./escape_field.go:178:2:     from x1 := iface.(X) (assign) at ./escape_field.go:183:5
+./escape_field.go:178:2:   flow: {storage for x1} = x1:
+./escape_field.go:178:2:     from x1 (interface-converted) at ./escape_field.go:184:9
+my global ref escape count 23
+./escape_field.go:178:2: moved to heap: i
+./escape_field.go:182:26: x does not escape
+./escape_field.go:184:9: x1 escapes to heap
+return too_large dynamic_alloc global outerloop indirect coroutine callparam unknown
+*****#9# 0 0 0 23 0 0 0 1 0 #

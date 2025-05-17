@@ -11,3 +11,7 @@ return too_large dynamic_alloc global outerloop indirect coroutine callparam map
 *****#10# 1 0 0 0 0 0 0 0 0 0 #
 *****#10# 1 0 0 0 0 0 0 0 0 0 #
 *****#10# 1 0 0 0 0 0 0 1 0 2 #
+*****#10# 2 0 0 0 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 0 0 1 #
+*****#10# 2 0 0 0 0 0 0 0 0 0 #
+*****#10# 2 0 0 0 0 0 0 0 0 0 #

@@ -10,7 +10,7 @@
       "args": [
         "-m=2", "-l",
         "-o", "${workspaceFolder}/demo/demo.o",                    // 输出文件
-        "${workspaceFolder}/demo/demo2.go"                          // 要编译的 main 源文件
+        "${workspaceFolder}/demo/demo.go"                          // 要编译的 main 源文件
       ],
       "cwd": "${workspaceFolder}/demo",                            // 工作目录可设为 main 包所在处 :contentReference[oaicite:4]{index=4}
       "env": {

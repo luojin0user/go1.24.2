@@ -79,18 +79,6 @@ func return3() *int {
 // Stub substitutes a fake for the call to os.Exit(1).
 // A StubbedExit is a testing fake for os.Exit.
 
-type StubbedExit struct {
-	Exited bool
-	Code   int
-	prev   func(code int)
-}
-
-func Stub() *StubbedExit {
-	s := &StubbedExit{}
-	sink = s.prev
-	return s
-}
-
 // Uitoa converts val to a decimal string.
 /*
 func Uitoa(val uint) string {
@@ -171,7 +159,7 @@ func returnAddress2() *int {
 	i_testAddr := 10
 	return &i_testAddr // 局部变量 i 的地址被返回，i 会逃逸到堆上
 }
-
+*/
 func returnAddress3() **int {
 	// i_testAddr := 10
 	// p = &i_testAddr
@@ -182,6 +170,7 @@ func returnAddress3() **int {
 	return p2 // 局部变量 i 的地址被返回，i 会逃逸到堆上
 }
 
+/*
 func outerLoopReference() {
 	var outerRef *int
 

@@ -150,6 +150,7 @@ func Batch(fns []*ir.Func, recursive bool) {
 	// 开始判断新的函数
 	// 重置变量
 	whys = []one_why{}
+	escape_paths = []*location{}
 	one_escape_func = []one_escape{}
 
 	var b batch

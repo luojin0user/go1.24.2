@@ -3,6 +3,7 @@ package demo
 var sink interface{}
 var g1, g2 *int
 
+/*
 type Data struct {
 	value int
 }
@@ -26,6 +27,33 @@ func (m MyType) GetData() *ff {
 func (m MyType) main() {
 	m.GetData().header["111"] = []string{}
 }
+*/
+/*
+// 定义一个接口
+type MyInterface interface {
+	GetName() string
+}
+
+// 实现该接口的结构体
+type MyStruct struct {
+	Name string
+	Age  *int
+}
+
+// 实现接口方法
+func (m MyStruct) GetName() string {
+	return m.Name
+}
+
+func main() {
+	// 将子类赋值给接口变量
+	var iface MyInterface = MyStruct{Name: "Alice"}
+
+	i := 10
+	// 类型断言：将接口转换为具体类型
+	iface.(*MyStruct).Age = &i
+}
+*/
 
 /*
 func escape() *int {

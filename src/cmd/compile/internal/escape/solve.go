@@ -436,6 +436,18 @@ func (b *batch) lhs_is_oname(n *ir.Node) bool {
 	}
 }
 
+func (b *batch) node_is_indirect_lvalue(n *ir.Node) bool {
+	_, ok1 := (*n).(*ir.StarExpr)
+	_, ok2 := (*n).(*ir.SelectorExpr)
+	_, ok3 := (*n).(*ir.IndexExpr)
+
+	if ok1 || ok2 || ok3 {
+		return true
+	} else {
+		return false
+	}
+}
+
 // 返回一个任意lhs种类的ir.Node的ir.Name字段
 // 间接访存用到，与lhs_is_oname函数一起判断左值是否是合法的，递归找左值变量名
 func (b *batch) find_Node_Name(n *ir.Node) *ir.Name {
@@ -462,6 +474,11 @@ func (b *batch) find_Node_Name(n *ir.Node) *ir.Name {
 	v5, ok5 := (*n).(*ir.ConvExpr)
 	if ok5 {
 		return b.find_Node_Name(&v5.X)
+	}
+
+	v6, ok6 := (*n).(*ir.TypeAssertExpr)
+	if ok6 {
+		return b.find_Node_Name(&v6.X)
 	}
 
 	return nil
@@ -609,12 +626,15 @@ func (b *batch) countAll() {
 		if !haven_find_escape && haven_heap_escape {
 			ass1, ok1 := (*whys[whys_len].where).(*ir.AssignStmt)
 			ass2, ok2 := (*whys[whys_len].where).(*ir.AssignListStmt)
-			if ok1 || ok2 {
+			ass3, ok3 := (*whys[whys_len].where).(*ir.AssignOpStmt)
+			if ok1 || ok2 || ok3 {
 				var alvalues []ir.Node
 				if ok1 {
 					alvalues = append(alvalues, ass1.X)
-				} else {
+				} else if ok2 {
 					alvalues = ass2.Lhs
+				} else {
+					alvalues = append(alvalues, ass3.X)
 				}
 
 				for _, alvalue := range alvalues {
@@ -626,7 +646,7 @@ func (b *batch) countAll() {
 							haven_find_escape = true
 							break
 						} else {
-							// 左边是不是一个map类型的变量，如果是，那么是indirect类型的
+							// 左边是一个map类型的变量，如果是，那么是indirect类型的
 							if lvalue_is_map {
 								escape_reason = E_INDIRECT
 								haven_find_escape = true
@@ -636,17 +656,12 @@ func (b *batch) countAll() {
 								haven_find_escape = true
 							}
 						}
-					} else if lhs_name.Class != ir.PEXTERN {
+					} else if lhs_name.Class != ir.PEXTERN && b.node_is_indirect_lvalue(&alvalue) {
 						// 如果是对应的逃逸节点，再去判断是不是全局类型的
 						// 判断间接引用
 						// 如果左边不是Name类型的，而且左边不是PEXTERN，那么可能是间接引用的，也可能是函数参数的
-						if lhs_name.Class != ir.PPARAM {
-							escape_reason = E_INDIRECT
-							haven_find_escape = true
-						} else {
-							escape_reason = E_FUNCPARAM
-							haven_find_escape = true
-						}
+						escape_reason = E_INDIRECT
+						haven_find_escape = true
 						break
 					} else if lhs_name.Class == ir.PEXTERN {
 						// 一定是全局变量类型的

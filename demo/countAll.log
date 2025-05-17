@@ -2,3 +2,12 @@ return too_large dynamic_alloc global outerloop indirect coroutine callparam unk
 *****#9# 3 0 0 16 0 0 0 32 0 #return too_large dynamic_alloc global outerloop indirect coroutine callparam mapindex unknown
 return too_large dynamic_alloc global outerloop indirect coroutine callparam mapindex unknown
 return too_large dynamic_alloc global outerloop indirect coroutine callparam mapindex unknown
+return too_large dynamic_alloc global outerloop indirect coroutine callparam mapindex unknown
+*****#10# 1 0 0 0 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 0 0 0 #
+*****#10# 0 0 0 1 0 0 0 0 0 0 #
+*****#10# 1 0 0 1 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 0 0 0 #
+*****#10# 1 0 0 0 0 0 0 1 0 2 #

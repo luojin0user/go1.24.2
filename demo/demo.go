@@ -75,16 +75,20 @@ func return3() *int {
 //		k = string(b)
 //		return
 //	}
-type Address struct {
-	Name    string // Proper name; may be empty.
-	Address string // user@domain
+//
+// Stub substitutes a fake for the call to os.Exit(1).
+// A StubbedExit is a testing fake for os.Exit.
+
+type StubbedExit struct {
+	Exited bool
+	Code   int
+	prev   func(code int)
 }
 
-func hhh() []*Address {
-	return []*Address{{
-		Name:    "111",
-		Address: "spec",
-	}}
+func Stub() *StubbedExit {
+	s := &StubbedExit{}
+	sink = s.prev
+	return s
 }
 
 // Uitoa converts val to a decimal string.

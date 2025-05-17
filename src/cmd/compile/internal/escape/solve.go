@@ -524,7 +524,7 @@ func (b *batch) countAll() {
 
 	whys_len := len(whys) - 1 // whys的长度减一，用于索引
 	if whys_len < 0 {
-		ac.c_unknown++
+		b.recordEscapeInfo(whys[0].srcLoc, whys[len(whys)-1].dstLoc, E_UNKNOWN)
 		is_not_1_edge = false
 		return
 	}
@@ -692,7 +692,7 @@ func (b *batch) countAll() {
 		}
 
 		// 非常量make
-		if whys[whys_len].why == "non-constant size" {
+		if whys[whys_len].why == "non-constant size" || whys[whys_len].why == "appendee slice" {
 			escape_reason = E_DYNAMIC
 			haven_find_escape = true
 		}

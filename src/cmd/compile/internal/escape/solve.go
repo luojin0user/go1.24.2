@@ -225,6 +225,7 @@ var one_escape_func = []one_escape{}   // 用于记录所有的逃逸节点以�
 var output_flow bool = true            // 是否输出详细的flow
 
 var is_parameter_leaks bool = false // 当前变量是不是不用统计的函数参数类型
+var lvalue_is_map bool = false      //左边变量是一个
 
 type one_why struct {
 	why     string    // 一个why
@@ -610,13 +611,10 @@ func (b *batch) countAll() {
 			ass2, ok2 := (*whys[whys_len].where).(*ir.AssignListStmt)
 			if ok1 || ok2 {
 				var alvalues []ir.Node
-				var arvalues []ir.Node
 				if ok1 {
 					alvalues = append(alvalues, ass1.X)
-					arvalues = append(arvalues, ass1.Y)
 				} else {
 					alvalues = ass2.Lhs
-					arvalues = ass2.Rhs
 				}
 
 				for _, alvalue := range alvalues {
@@ -628,8 +626,15 @@ func (b *batch) countAll() {
 							haven_find_escape = true
 							break
 						} else {
-							escape_reason = E_UNKNOWN
-							haven_find_escape = true
+							// 左边是不是一个map类型的变量，如果是，那么是indirect类型的
+							if lvalue_is_map {
+								escape_reason = E_INDIRECT
+								haven_find_escape = true
+								break
+							} else {
+								escape_reason = E_UNKNOWN
+								haven_find_escape = true
+							}
 						}
 					} else if lhs_name.Class != ir.PEXTERN {
 						// 如果是对应的逃逸节点，再去判断是不是全局类型的
@@ -659,7 +664,6 @@ func (b *batch) countAll() {
 					haven_find_escape = true
 				}
 			}
-
 		}
 
 		// 如果是返回值类型的
@@ -714,7 +718,8 @@ func (b *batch) countAll() {
 		}
 
 		// 非常量make
-		if !haven_find_escape && whys[whys_len].why == "non-constant size" || whys[whys_len].why == "appendee slice" {
+		if !haven_find_escape && whys[whys_len].why == "non-constant size" || whys[whys_len].why == "appendee slice" ||
+			whys[whys_len].why == "appended slice..." {
 			escape_reason = E_DYNAMIC
 			haven_find_escape = true
 		}

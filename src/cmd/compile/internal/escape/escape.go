@@ -122,7 +122,10 @@ type escape struct {
 func Funcs(all []*ir.Func) {
 	ir.VisitFuncsBottomUp(all, Batch)
 	// 然后输出所有的统计信息
-	output_one_package_countAll()
+	if base.Flag.LowerM >= 2 {
+		output_one_package_countAll()
+	}
+
 }
 
 func output_one_package_countAll() {

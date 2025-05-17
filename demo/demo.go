@@ -7,6 +7,26 @@ type Data struct {
 	value int
 }
 
+type Header map[string][]string
+
+type ff struct {
+	header Header
+}
+
+// 定义一个类型，包含一个 map[string][]string 属性
+type MyType struct {
+	data ff
+}
+
+// 返回 data 属性的方法
+func (m MyType) GetData() *ff {
+	return &m.data
+}
+
+func (m MyType) main() {
+	m.GetData().header["111"] = []string{}
+}
+
 /*
 func escape() *int {
 	v := 42 // 局部变量
@@ -160,6 +180,7 @@ func returnAddress2() *int {
 	return &i_testAddr // 局部变量 i 的地址被返回，i 会逃逸到堆上
 }
 */
+/*
 func returnAddress3() **int {
 	// i_testAddr := 10
 	// p = &i_testAddr
@@ -169,6 +190,7 @@ func returnAddress3() **int {
 	p2 := &p1
 	return p2 // 局部变量 i 的地址被返回，i 会逃逸到堆上
 }
+*/
 
 /*
 func outerLoopReference() {
